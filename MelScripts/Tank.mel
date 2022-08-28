@@ -1,0 +1,132 @@
+//Second maya script create Tank
+
+//Create Treads
+
+polyCylinder -radius 1 -height 1 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2 1 -2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+select -replace pCylinder1.f[9:18] pCylinder1.f[29:38] pCylinder1.f[49:58] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 2 -pivotY 0.5 -pivotZ 0.5 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[9:18] pCylinder1.f[29:38] pCylinder1.f[49:58];
+move -relative 0 0 5;
+
+select -clear;
+select -add pCylinder1.f[20:39] pCylinder1.f[62:63];
+select -add pCylinder1.f[40:59] pCylinder1.f[64:65];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 2 -pvy 0.9999998808 -pvz -2.384185791e-07 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[20:59] pCylinder1.f[62:65];
+setAttr "polyExtrudeFace2.offset" 0.1;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX -2 -pivotY 1 -pivotZ -3.6 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[20:59] pCylinder1.f[62:65];
+setAttr "polyExtrudeFace3.localTranslate" -type double3 0 0 -0.4;
+
+
+polyCylinder -radius 1 -height 1 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance -2 1 -2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+select -replace pCylinder2.f[9:18] pCylinder2.f[29:38] pCylinder2.f[49:58] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 2 -pivotY 0.5 -pivotZ 0.5 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder2.f[9:18] pCylinder2.f[29:38] pCylinder2.f[49:58];
+move -relative 0 0 5;
+select -clear;
+select -add pCylinder2.f[20:59] pCylinder2.f[62:65];
+
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -2 -pvy 0.9999998808 -pvz -2.384185791e-07 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder2.f[20:59] pCylinder2.f[62:65];
+setAttr "polyExtrudeFace5.offset" 0.1;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX -2 -pivotY 1 -pivotZ -3.6 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder2.f[20:59] pCylinder2.f[62:65];
+setAttr "polyExtrudeFace6.localTranslate" -type double3 0 0 -0.4;
+
+
+//Create wheels
+polyCylinder -radius 0.9 -height .8 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance -2 1 2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.9 -height .8 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance -2 1 -2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.9 -height .8 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance -2 1 0;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.9 -height .8 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2 1 2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.9 -height .8 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2 1 -2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.9 -height .8 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2 1 0;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.2 -height 4.9 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 1 2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.2 -height 4.9 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 1 -2.5;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+polyCylinder -radius 0.2 -height 4.9 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 1 0;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+//Create Body
+polyCube -width 2.95 -height 2.6 -depth 5.5 -subdivisionsX 2 -subdivisionsY 4 -subdivisionsZ 2 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 2.05 0;
+select -replace pCube1.f[36:39] pCube1.f[28:31];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 0 -pivotY 2.75 -pivotZ 0 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[36:39] pCube1.f[28:31];
+setAttr "polyExtrudeFace7.localTranslate" -type double3 0 0 0.95;
+select -replace pCube1.f[2:7];
+move -relative 0 0 0.6;
+select -replace pCube1.f[8:11];
+move -relative 0 0.35 0;
+select -replace pCube1.e[8:9] pCube1.e[89] pCube1.e[109];
+move -relative 0 0 -1;
+
+//Create Cannon
+polyCube -width 2 -height .9 -depth 2 -subdivisionsX 3 -subdivisionsY 2 -subdivisionsZ 3 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 4.15 0;
+select -replace pCube2.f[40] pCube2.f[37] pCube2.f[34] pCube2.f[31];
+scale -relative -pivot 0cm 4.1cm 0cm 1.25 1 1;
+
+polyCylinder -radius 0.2 -height 4.5 -subdivisionsX 20 -subdivisionsY 4 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 4.15 3;
+rotate -relative -objectSpace -forceOrderXYZ 90 0 0;
+select -replace pCylinder12.vtx[101];
+polyChamferVtx 1 0.75 0;
+select -replace pCylinder12.f[100];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX -1.49 -pivotY 4.2 -pivotZ 5.25 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder12.f[100];
+setAttr "polyExtrudeFace8.localTranslate" -type double3 0 0 -3.56;
+
+polyCylinder -radius 0.7 -height .4 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 3 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 4.5 0;
+select -replace pCylinder13.f[42:45];
+scale -relative -pivot 4.47035e-08cm 4.5cm -0.633156cm 1 1 1e-05;
+move -relative 0 0 0.128;
+
+//Create Back Ornamentation
+polyCube -width 2 -height .9 -depth .5 -subdivisionsX 3 -subdivisionsY 2 -subdivisionsZ 2 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 3 -3;
+select -replace pCube3.e[18:20];
+move -relative 0 0 0.14;
+select -replace pCube3.f[13] pCube3.f[16];
+move -relative 0 0 -0.16;
+
+polyCylinder -radius 0.15 -height .2 -subdivisionsX 10 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0.7 3.5 -3;
+
+polyCylinder -radius 0.15 -height .2 -subdivisionsX 10 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0.3 3.5 -3;
+
+polyCylinder -radius 0.15 -height .2 -subdivisionsX 10 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance -0.1 3.5 -3;
+
+polyCube -width .5 -height .2 -depth .25 -subdivisionsX 3 -subdivisionsY 2 -subdivisionsZ 2 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance -0.6 3.5 -3;
+
+
+
+
+
+
+

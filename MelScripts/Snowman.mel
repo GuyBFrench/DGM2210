@@ -1,0 +1,120 @@
+//This is my very first mel script
+
+//Create the first layer
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 3.0 0;
+
+//Create the second layer
+polySphere -radius 2.1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 7.2 0;
+
+//Create the third layer
+polySphere -radius 1.2 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 10 0;
+
+//Create the nose
+polyCone -radius 0.2 -height 2 -subdivisionsX 20 -subdivisionsY 4 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 10.1 0;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 -90 ;
+move -relative -objectSpace -worldSpaceDistance 0 2 0;
+select -replace pCone1.vtx[80];
+move -relative -0.299584 0 0;
+
+//Create the hat
+polyCylinder -radius 0.9 -height 1.8 -subdivisionsX 20 -subdivisionsY 4 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 11.8 0;
+select -replace pCylinder1.f[0:19];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX -1.192092896e-07 -pivotY 11.12500002 -pivotZ -1.490116119e-07 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[0:19];
+setAttr "polyExtrudeFace1.localTranslate" -type double3 0 0 0.7 ;
+
+
+//Create the buttons
+polySphere -radius 0.3 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2.8 4 0.03;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 15 ;
+
+polySphere -radius 0.3 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 3 3 0;
+scale -relative 0.5 1 1;
+
+polySphere -radius 0.3 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2.8 2 -0.06;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 -13;
+
+polySphere -radius 0.3 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 2.08 6.8 0;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 -5;
+
+polySphere -radius 0.3 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 1.9 8 0.03;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 13;
+
+//Create the eyes
+polySphere -radius 0.2 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 1.06 10.5 0.4;
+scale -relative 0.5 1.05 0.92;
+rotate -relative -objectSpace -forceOrderXYZ 20 -8 16;
+
+polySphere -radius 0.2 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 1.06 10.5 -0.4;
+scale -relative 0.5 0.96 1.09;
+rotate -relative -objectSpace -forceOrderXYZ -5 18 16;
+
+//Create the mouth pieces
+polySphere -radius 0.1 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 1.18 9.7 0;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 -5;
+
+polySphere -radius 0.1 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 1.13 9.78 -0.25;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 8 -5;
+
+polySphere -radius 0.1 -subdivisionsX 10 -subdivisionsY 10 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 1.13 9.78 0.25;
+scale -relative 0.5 1 1;
+rotate -relative -objectSpace -forceOrderXYZ 0 8 5;
+
+//Create the left arm
+polyCylinder -radius 0.1 -height 1.8 -subdivisionsX 20 -subdivisionsY 4 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 7.4 1.8;
+rotate -relative -objectSpace -forceOrderXYZ 60 8 5;
+select -replace pCylinder2.f[100:119];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 0.069 -pivotY 7.857 -pivotZ 2.571 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder2.f[100:119];
+setAttr "polyExtrudeFace2.localTranslate" -type double3 0 0 2.5;
+move -relative 0 0.25 0;
+move -relative 0 0 -0.25;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 0.26 -pivotY 9.15 -pivotZ 4.7 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder2.f[100:119];
+setAttr "polyExtrudeFace3.localTranslate" -type double3 0 0 0.3;
+setAttr "polyExtrudeFace3.localTranslate" -type double3 0 0.2 0.3;
+scale -relative -p 0.3cm 9.5cm 4.85cm 0.7 1 0.7;
+select -replace pCylinder2;
+scale -relative 0.83156 1 1;
+
+polyCylinder -radius 0.06 -height 0.8 -subdivisionsX 10 -subdivisionsY 4 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0.22 9 4.5;
+rotate -relative -objectSpace -forceOrderXYZ -60 0 0;
+
+//Create the right arm
+polyCylinder -radius 0.15 -height 1.8 -subdivisionsX 20 -subdivisionsY 4 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0.2 7.6 -1.8;
+rotate -relative -objectSpace -forceOrderXYZ -68 8 -5;
+select -replace pCylinder4.f[100:119];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 0.113 -pivotY 7.945 -pivotZ -2.626 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder4.f[100:119];
+setAttr "polyExtrudeFace4.localTranslate" -type double3 0 0 1.1;
+setAttr "polyExtrudeFace4.localTranslate" -type double3 0 0.2 1;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pivotX 0.0178 -pivotY 8.145932192 -pivotZ -3.621745137 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder4.f[100:119];
+setAttr "polyExtrudeFace5.localTranslate" -type double3 0 0 1.45;
+setAttr "polyExtrudeFace5.localTranslate" -type double3 0 -0.5 1.45;
+
+polyCylinder -radius 0.09 -height 1.3 -subdivisionsX 10 -subdivisionsY 4 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 8 -4.5;
+rotate -relative -objectSpace -forceOrderXYZ 60 0 0;
+
+
+
