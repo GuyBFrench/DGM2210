@@ -1,0 +1,63 @@
+//My Dyanmic Macro Script 3rd practice script
+
+float $citySize = 30;
+int $cityBuildings = 75;
+float $shortBuildingsHeight = 1.1;
+float $tallBuildingsHeight = 2.3;
+int $cityKeeps = 3;
+float $keepsSize = 3.7;
+seed 10;
+
+
+polyCylinder -radius $citySize -height 4 -subdivisionsX 60 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative 0 1 0;
+select -replace pCylinder1.f[120:179];
+select -add pCylinder1.f[60:119];
+
+doDelete;
+select -replace pCylinder1.f[0:59];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -2.861022949e-06 -pvy 0 -pvz -4.768371582e-06 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[0:59];
+
+setAttr "polyExtrudeFace1.localTranslate" -type double3 0 0 ($citySize/50) ;
+
+polyDisc -sides 30 -subdivisionMode 3 -subdivisions 1 -radius ($citySize + 0.3);
+move -relative 0 0.1 0;
+
+polyCylinder -radius ($keepsSize) -height $keepsSize -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative 0 ($keepsSize/2) 0;
+
+polyCube -width $keepsSize -height ($keepsSize) -depth $keepsSize -subdivisionsX 1 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+move -relative 0 ($keepsSize*1.1) 0;
+
+
+for( $i=0; $i<($cityBuildings); ++$i)
+{
+	polyCube -width 1 -height $shortBuildingsHeight -depth 1 -subdivisionsX 1 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+
+    string $selectedList[] = `ls -sl`;
+    string $currentHouse;
+    setAttr ($currentHouse + ".translateX") (rand(-($citySize/1.4),($citySize/1.4)));
+    setAttr ($currentHouse + ".translateZ") (rand(-($citySize/1.4),($citySize/1.4)));
+    move -relative 0 ($shortBuildingsHeight/2) 0;
+
+    polyCube -width 1 -height $tallBuildingsHeight -depth 1 -subdivisionsX 1 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+
+    setAttr ($currentHouse + ".translateX") (rand(-($citySize/1.4),($citySize/1.4)));
+    setAttr ($currentHouse + ".translateZ") (rand(-($citySize/1.4),($citySize/1.4)));
+    move -relative 0 ($tallBuildingsHeight/2) 0;
+
+}
+
+for( $i=0; $i<($cityKeeps); ++$i)
+{
+    polyCube -width $keepsSize -height ($keepsSize) -depth $keepsSize -subdivisionsX 1 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+
+        string $selectedKeep[] = `ls -sl`;
+        string $currentKeep;
+
+    setAttr ($currentKeep + ".translateX") (rand(-($citySize/1.3),($citySize/1.3)));
+    setAttr ($currentKeep + ".translateZ") (rand(-($citySize/1.3),($citySize/1.3)));
+    move -relative 0 ($keepsSize/2) 0;
+
+}
+
