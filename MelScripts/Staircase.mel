@@ -1,0 +1,26 @@
+
+proc CreateStaircase(int $stairNumber, float $stairDepth, float $stairWidth, float $stairHeight, float $stairPivot, float $stepHeight, float $stepRotation)
+{
+
+    polyCube -width $stairWidth -height $stairHeight -depth $stairDepth -subdivisionsX 1 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+    move -relative (-$stairPivot * 2.5) ($stairHeight) 0;
+    xform -rotatePivot 0 0 ($stairPivot);
+
+    duplicate -rr;
+    move -r ($stairWidth / 2.5) ($stepHeight) ($stairWidth / 2) ;
+    rotate -r -os -fo 0 ($stepRotation) 0;
+
+    for($i = 0; $i <= $stairNumber; $i++)
+    {
+        duplicate -smartTransform;
+    }
+
+}
+
+CreateStaircase(50, 1, 2.8, 0.4, 2, 0.4, 18);
+
+
+
+
+
+
