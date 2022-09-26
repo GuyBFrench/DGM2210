@@ -1,12 +1,12 @@
 
 
 
-global proc Addition(float $inputNumbers[])
+global proc Addition(float $numbers[])
 {
-    float $output = ($inputNumbers[0]);
-    for($i=1; $i<(size($inputNumbers)); $i++)
+    float $output = ($numbers[0]);
+    for($i=1; $i<(size($numbers)); $i++)
     {
-        $output += $inputNumbers[$i];
+        $output += $numbers[$i];
     }
     print ($output);
     
@@ -160,10 +160,19 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
         print("\n");
     }
     else if($operationNumber == 5)
-    {        
-        print ($inputNumbers[0] + " ^ " + $inputNumbers[1] + " = ");
-        Power($inputNumbers);
-        print("\n");
+    {   
+        if((size($inputNumbers)) == 2)
+        {
+            print ($inputNumbers[0] + " ^ " + $inputNumbers[1] + " = ");
+            Power($inputNumbers);
+            print("\n");
+        }
+        else
+        {
+            print ("The power operation only accepts 2 numbers");
+            print("\n");
+        }
+        
     }
     else if($operationNumber == 6)
     {
@@ -193,9 +202,15 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
     }
     else
     {
-        print("Please input a valid operation type as a value, 1 through 7." + "\n");
+        print ("Please input a valid operation type as a value, 1 through 7." + "\n");
+        print ("The operations are:" + "\n" + "1 is Addition" + "\n" + "2 is Subtraction" + "\n" + "3 is Multiplication" + "\n" + "4 is Division" + "\n" + "5 is Power" + "\n" + "6 is Mean" + "\n" + "7 is Median" + "\n");
+        print ("When calling the Calculator function enter the operation number first then a comma and followed by the input values contained in a set of curly braces each separated with a comma. " + "\n");
+    }
+    if($length == 0)
+    {
+        print ("Math operations tend to work better with at least two numbers" + "\n");
     }
 
 }
 
-Calculator(3, {23.5, 19, 10, 5, 6.5, 2, 1, 11});
+Calculator(1, {1, 12, 15, 9});
