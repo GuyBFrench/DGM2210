@@ -1,56 +1,53 @@
-
-
-
-global proc Addition(float $numbers[])
+global proc float Addition(float $numbers[])
 {
     float $output = ($numbers[0]);
     for($i=1; $i<(size($numbers)); $i++)
     {
         $output += $numbers[$i];
     }
-    print ($output);
+    return $output;
     
 }
 
 //Addition({12, 2, 4, 6});
 
-global proc Subtraction(float $numbers[])
+global proc float Subtraction(float $numbers[])
 {
     float $output = ($numbers[0]);
     for($i=1; $i<(size($numbers)); $i++)
     {
         $output -= $numbers[$i];
     }
-    print ($output);
+    return $output;
 }
 
 //Subtraction({12, 2, 4, 6});
 
-global proc Multiplication(float $numbers[])
+global proc float Multiplication(float $numbers[])
 {
     float $output = ($numbers[0]);
     for($i=1; $i<(size($numbers)); $i++)
     {
         $output *= $numbers[$i];
     }
-    print ($output);
+    return $output;
 }
 
 //Multiplication({10, 2});
 
-global proc Division(float $numbers[])
+global proc float Division(float $numbers[])
 {
     float $output = ($numbers[0]);
     for($i=1; $i<(size($numbers)); $i++)
     {
         $output /= $numbers[$i];
     }
-    print ($output);
+    return $output;
 }
 
 //Division({100, 2, 10});
 
-global proc Power(float $numbers[])
+global proc float Power(float $numbers[])
 {
     int $output = ($numbers[0]);
     int $firstNumber = ($numbers[0]);
@@ -61,14 +58,14 @@ global proc Power(float $numbers[])
     }
 
 
-    print ($output);
+    return $output;
 
     //Can also use command (pow x^y);
 }
 
 //Power({12, 9});
 
-global proc Mean(float $numbers[])
+global proc float Mean(float $numbers[])
 {
     float $output = ($numbers[0]);
     for ($i=1; $i<(size($numbers)); $i++)
@@ -77,12 +74,13 @@ global proc Mean(float $numbers[])
         }
 
     $output /= (size($numbers));
-    print ($output);
+    return $output;
+    //print ($output);
 }
 
-//Mean({12.4, 10, 13, 3, 4, 6, 1.5});
+//Mean(float{12, 10, 13, 3, 4, 6, 1.5});
 
-global proc Median(float $numbers[])
+global proc float Median(float $numbers[])
 {
     $numbers = `sort $numbers`;
 
@@ -106,7 +104,7 @@ global proc Median(float $numbers[])
         $difference += $determine;
     }
 
-    print($difference);
+    return $difference;
 }
 
 //Median({23.5, 19, 10, 5, 6.5, 2, 1, 11});
@@ -123,7 +121,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
             print (" + ");
         }
         print (($inputNumbers[$length]) + " = ");
-        Addition($inputNumbers);
+        print (Addition($inputNumbers));
         print("\n");
     }
     else if($operationNumber == 2)
@@ -134,7 +132,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
             print (" - ");
         }
         print (($inputNumbers[$length]) + " = ");
-        Subtraction($inputNumbers);
+        print (Subtraction($inputNumbers));
         print("\n");
     }
     else if($operationNumber == 3)
@@ -145,7 +143,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
             print (" * ");
         }
         print (($inputNumbers[$length]) + " = ");
-        Multiplication($inputNumbers);
+        print (Multiplication($inputNumbers));
         print("\n");
     }
     else if($operationNumber == 4)
@@ -156,7 +154,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
             print (" / ");
         }
         print (($inputNumbers[$length]) + " = ");
-        Division($inputNumbers);
+        print (Division($inputNumbers));
         print("\n");
     }
     else if($operationNumber == 5)
@@ -164,7 +162,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
         if((size($inputNumbers)) == 2)
         {
             print ($inputNumbers[0] + " ^ " + $inputNumbers[1] + " = ");
-            Power($inputNumbers);
+            print (Power($inputNumbers));
             print("\n");
         }
         else
@@ -183,7 +181,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
             print (", ");
         }
         print (($inputNumbers[$length]) + ") = ");
-        Mean($inputNumbers);
+        print (Mean($inputNumbers));
         print("\n");
     }
     else if($operationNumber == 7)
@@ -197,7 +195,7 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
             print (", ");
         }
         print (($inputNumbers[$length]) + ") = ");
-        Median($inputNumbers);
+        print (Median($inputNumbers));
         print("\n");
     }
     else
@@ -213,4 +211,4 @@ proc Calculator(int $operationNumber, float $inputNumbers[])
 
 }
 
-Calculator(1, {1, 12, 15, 9});
+Calculator(1, float{1, 12, 15, 9});
