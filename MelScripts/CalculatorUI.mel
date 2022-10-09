@@ -1,0 +1,272 @@
+//Calculator UI
+
+global proc float Addition(float $numbers[])
+{
+    float $output = ($numbers[0]);
+    for($i=1; $i<(size($numbers)); $i++)
+    {
+        $output += $numbers[$i];
+    }
+    return $output;
+    
+}
+
+//Addition({12, 2, 4, 6});
+
+global proc float Subtraction(float $numbers[])
+{
+    float $output = ($numbers[0]);
+    for($i=1; $i<(size($numbers)); $i++)
+    {
+        $output -= $numbers[$i];
+    }
+    return $output;
+}
+
+//Subtraction({12, 2, 4, 6});
+
+global proc float Multiplication(float $numbers[])
+{
+    float $output = ($numbers[0]);
+    for($i=1; $i<(size($numbers)); $i++)
+    {
+        $output *= $numbers[$i];
+    }
+    return $output;
+}
+
+//Multiplication({10, 2});
+
+global proc float Division(float $numbers[])
+{
+    float $output = ($numbers[0]);
+    for($i=1; $i<(size($numbers)); $i++)
+    {
+        $output /= $numbers[$i];
+    }
+    return $output;
+}
+
+//Division({100, 2, 10});
+
+global proc float Power(float $numbers[])
+{
+    
+    float $firstNumber = ($numbers[0]);
+    float $toThePower = ($numbers[1]);
+    float $output = `pow $numbers[0] $numbers[1]`;
+    return ($output);
+
+}
+
+//Power({12, 9});
+
+global proc float Mean(float $numbers[])
+{
+    float $output = ($numbers[0]);
+    for ($i=1; $i<(size($numbers)); $i++)
+        {
+            $output += $numbers[$i];
+        }
+
+    $output /= (size($numbers));
+    return $output;
+    //print ($output);
+}
+
+//Mean(float{12, 10, 13, 3, 4, 6, 1.5});
+
+global proc float Median(float $numbers[])
+{
+    
+    
+    $numbers = `sort $numbers`;
+
+    int $lengthCheck = (size($numbers));
+    $lengthCheck = $lengthCheck % 2;
+    float $output = 0.0;
+    float $determine = 0.0;
+    float $difference = 0.0;
+
+    if($lengthCheck == 1)
+    {
+        int $halfway = ((size($numbers)) / 2);
+        $difference = ($numbers[$halfway]);
+
+    }
+    else
+    {
+        int $halfway = ((size($numbers)) / 2);
+        $output = ($numbers[$halfway]);
+        $determine = ($numbers[($halfway - 1)]);
+        $difference = (($output - $determine) / 2);
+        $difference += $determine;
+    }
+
+    return $difference;
+}
+
+Median({2.3, 7.3, 5.6, 10.6, 12.4});
+
+global proc Calculator(int $operationNumber, float $inputNumbers[])
+{
+    string $outputField = `optionVar -q "output"`;
+    string $outputTextArray[];
+    string $outputTempArray[];
+    string $outputText;
+    string $outputTemp;
+    print ($operationNumber);
+
+    int $length = ((size($inputNumbers)) - 1);
+    if ($operationNumber == 1)
+    {
+        
+        for($i=0; $i < (size($inputNumbers)); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+
+        $outputTemp = stringArrayToString($outputTempArray, " + ");
+        $outputTextArray[0] = $outputTemp;
+        $outputTextArray[1] = (" = " + (Addition($inputNumbers)));
+        
+    }
+    else if($operationNumber == 2)
+    {
+        for($i=0; $i < (size($inputNumbers)); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+
+        $outputTemp = stringArrayToString($outputTempArray, " - ");
+        $outputTextArray[0] = $outputTemp;
+        $outputTextArray[1] = (" = " + (Subtraction($inputNumbers)));
+    }
+    else if($operationNumber == 3)
+    {
+        for($i=0; $i < (size($inputNumbers)); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+
+        $outputTemp = stringArrayToString($outputTempArray, " * ");
+        $outputTextArray[0] = $outputTemp;
+        $outputTextArray[1] = (" = " + (Multiplication($inputNumbers)));
+    }
+    else if($operationNumber == 4)
+    {
+        for($i=0; $i < (size($inputNumbers)); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+
+        $outputTemp = stringArrayToString($outputTempArray, " / ");
+        $outputTextArray[0] = $outputTemp;
+        $outputTextArray[1] = (" = " + (Division($inputNumbers)));
+    }
+    else if($operationNumber == 5)
+    {   
+
+        for($i=0; $i < (size($inputNumbers) - 1); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+
+        $outputTemp = stringArrayToString($outputTempArray, " ^ ");
+        $outputTextArray[0] = $outputTemp;
+        $outputTextArray[1] = (" = " + (Power($inputNumbers)));
+        
+    }
+    else if($operationNumber == 6)
+    {
+
+        for($i=0; $i < (size($inputNumbers)); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+
+        $outputTemp = stringArrayToString($outputTempArray, ", ");
+        $outputTextArray[0] = ("The mean of the numbers (" + $outputTemp);
+        $outputTextArray[1] = (") = " + (Mean($inputNumbers)));
+        
+    }
+    else if($operationNumber == 7)
+    {
+        //$inputNumbers = `sort $inputNumbers`;
+        for($i=0; $i < (size($inputNumbers)); $i++)
+        {
+            $outputTempArray[$i] = ($inputNumbers[$i]);
+        }
+        
+        $outputTemp = stringArrayToString($outputTempArray, ", ");
+        $outputTextArray[0] = ("The median of the numbers (" + $outputTemp);
+        $outputTextArray[1] = (") = " + (Median($inputNumbers)));
+
+    }
+    else
+    {
+        print ($operationNumber);
+        print ("Please input a valid operation type as a value, 1 through 7." + "\n");
+        print ("The operations are:" + "\n" + "1 is Addition" + "\n" + "2 is Subtraction" + "\n" + "3 is Multiplication" + "\n" + "4 is Division" + "\n" + "5 is Power" + "\n" + "6 is Mean" + "\n" + "7 is Median" + "\n");
+        print ("When calling the Calculator function enter the operation number first then a comma and followed by the input values contained in a set of curly braces each separated with a comma. " + "\n");
+    }
+    if($length == 0)
+    {
+        print ("Math operations tend to work better with at least two numbers" + "\n");
+    }
+    $outputText = stringArrayToString($outputTextArray, "");
+    textField -e -text ($outputText)$outputField;
+}
+
+//Calculator(1, float{1, 12, 15, 9});
+
+global proc InputNumbers()
+{
+    
+
+    string $input1 = `optionVar -q "firstInput"`;
+    string $input2 = `optionVar -q "secondInput"`;
+    string $input3 = `optionVar -q "thirdInput"`;
+    string $opNumber = `optionVar -q "operationNumber"`;
+    string $opNumber2 = `optionVar -q "operationNumber2"`;
+    
+    float $float1 = `floatField -q -value $input1`;
+    float $float2 = `floatField -q -value $input2`;
+    float $float3 = `floatField -q -value $input3`;
+    int $operationValue = `radioButtonGrp -q -select $opNumber`;
+    int $operationValue2 = `radioButtonGrp -q -select $opNumber2`;
+    if($operationValue == 0)
+    {
+        $operationValue2 += 4;
+    }
+
+    Calculator(($operationValue + $operationValue2), {$float1, $float2, $float3});
+}
+
+global proc CalculatorUI()
+{
+    string $cWindow = "calc_ui";
+
+    if(`window -exists $cWindow`)
+    {
+        deleteUI $cWindow; 
+    }
+
+    $cWindow = `window -height 300 -width 300 -title "Calculator" -sizeable 0 -resizeToFitChildren 1 $cWindow `;
+    string $cColumn = `columnLayout -adjustableColumn 1 -parent $cWindow`;
+
+    optionVar -stringValue "firstInput" `floatField -parent $cColumn`;
+    optionVar -stringValue "secondInput" `floatField -parent $cColumn`;
+    optionVar -stringValue "thirdInput" `floatField -parent $cColumn`;
+    optionVar -stringValue "operationNumber" `radioButtonGrp -numberOfRadioButtons 4 -labelArray4 "Addition" "Subtraction" "Multiplication" "Division" -parent $cColumn`;
+    string $opNumber = `optionVar -q "operationNumber"`;
+    optionVar -stringValue "operationNumber2" `radioButtonGrp -numberOfRadioButtons 3 -labelArray3 "Power" "Mean" "Median" -data1 5 -data2 6 -data3 7 -shareCollection $opNumber -parent $cColumn`;
+
+    button  -label "Calculate" -parent $cColumn -command InputNumbers -width 100 -height  60;
+
+    optionVar -stringValue "output" `textField -parent $cColumn -editable 0 -height 30`;
+
+    showWindow $cWindow;
+}
+
+CalculatorUI();
