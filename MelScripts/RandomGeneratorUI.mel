@@ -1,0 +1,163 @@
+
+global proc RandomizeSelection()
+{
+    string $selectedList[] = `ls -sl`;
+    string $outputField = `optionVar -q "information"`;
+
+    string $int1 = `optionVar -q "duplicates"`;
+    int $duplicates = `intField -q -value $int1`;
+
+    string $float1 = `optionVar -q "xMax"`;
+    string $float2 = `optionVar -q "xMin"`;
+    string $float3 = `optionVar -q "yMax"`;
+    string $float4 = `optionVar -q "yMin"`;
+    string $float5 = `optionVar -q "zMax"`;
+    string $float6 = `optionVar -q "zMin"`;
+    float $maxX = `floatField -q -value $float1`;
+    float $minX = `floatField -q -value $float2`;
+    float $maxY = `floatField -q -value $float3`;
+    float $minY = `floatField -q -value $float4`;
+    float $maxZ = `floatField -q -value $float5`;
+    float $minZ = `floatField -q -value $float6`;
+
+    if(size($selectedList) == 0)
+    {
+        textField -e -text ("This function requires objects to be selected")$outputField;
+    }
+    else
+    {
+        for($i=0; $i < (size($selectedList)); $i++)
+        {
+            $currentObj = $selectedList[$i];
+            for($l=0; $l < $duplicates; $l++)
+            {
+                float $xPos = (rand($maxX, $minX));
+                float $yPos = (rand($maxY, $minY));
+                float $zPos = (rand($maxZ, $minZ));
+                select -deselect;
+                select $currentObj;
+                duplicate -name ($currentObj);
+
+                move -relative $xPos $yPos $zPos;
+            }
+            
+        }
+        textField -e -text ("Objects positions randomized.")$outputField;
+    }
+    
+}
+
+//RandomizeSelection(10.0, -10.0, 10.0, -10.0, 10.0, -10.0);
+
+global proc RandomizeUI()
+{
+    string $rWindow = "random_ui";
+
+    if(`window -exists $rWindow`)
+    {
+        deleteUI $rWindow; 
+    }
+
+    $rWindow = `window -height 225 -width 300 -title "Randomize Positions" -sizeable 0 -resizeToFitChildren 0 $rWindow `;
+    string $rForm = `formLayout -numberOfDivisions 100`;
+    string $rButton = `button -label "Randomize" -parent $rForm -command RandomizeSelection -height 60`;
+    
+    string $duplicatesText = `textField -text "Duplicates" -editable 0 -width 75`;
+    string $xText = `textField -text "X Max/Min" -editable 0 -width 75`;
+    string $yText = `textField -text "Y Max/Min" -editable 0 -width 75`;
+    string $zText = `textField -text "Z Max/Min" -editable 0 -width 75`;
+    optionVar -stringValue "information" `textField -parent $rForm -editable 0`;
+    string $infoText = `optionVar -q "information"`;
+
+
+    optionVar -stringValue "duplicates" `intField -parent $rForm`;
+    optionVar -stringValue "xMax" `floatField -parent $rForm -width 65`;
+    optionVar -stringValue "xMin" `floatField -parent $rForm -width 65`;
+    optionVar -stringValue "yMax" `floatField -parent $rForm -width 65`;
+    optionVar -stringValue "yMin" `floatField -parent $rForm -width 65`;
+    optionVar -stringValue "zMax" `floatField -parent $rForm -width 65`;
+    optionVar -stringValue "zMin" `floatField -parent $rForm -width 65`;
+    
+    string $duplicates = `optionVar -q "duplicates"`;
+    string $xMax = `optionVar -q "xMax"`;
+    string $xMin = `optionVar -q "xMin"`;
+    string $yMax = `optionVar -q "yMax"`;
+    string $yMin = `optionVar -q "yMin"`;
+    string $zMax = `optionVar -q "zMax"`;
+    string $zMin = `optionVar -q "zMin"`;
+    
+
+    formLayout -edit
+    -attachForm $xText "top" 35
+    -attachNone $xText "left" 
+    -attachControl $xText "bottom" 5 $yText
+    -attachControl $xText "right" 5 $xMax
+
+    -attachForm $xMax "top" 35
+    -attachNone $xMax "left"
+    -attachControl $xMax "bottom" 5 $yMax
+    -attachControl $xMax "right" 5 $xMin
+
+    -attachForm $xMin "top" 35
+    -attachNone $xMin "left"
+    -attachControl $xMin "bottom" 5 $yMin
+    -attachForm $xMin "right" 40
+    
+    -attachForm $yText "top" 60
+    -attachNone $yText "left" 
+    -attachControl $yText "bottom" 50 $zText
+    -attachControl $yText "right" 5 $yMax
+    
+    -attachForm $yMax "top" 60
+    -attachNone $yMax "left"
+    -attachControl $yMax "bottom" 50 $zMax
+    -attachControl $yMax "right" 5 $yMin
+
+    -attachForm $yMin "top" 60
+    -attachNone $yMin "left"
+    -attachControl $yMin "bottom" 50 $zMin
+    -attachForm $yMin "right" 40
+
+    -attachForm $zText "top" 85
+    -attachNone $zText "left" 
+    -attachNone $zText "bottom"
+    -attachControl $zText "right" 5 $zMax
+    
+    -attachForm $zMax "top" 85
+    -attachNone $zMax "left"
+    -attachNone $zMax "bottom"
+    -attachControl $zMax "right" 5 $zMin
+
+    -attachForm $zMin "top" 85
+    -attachNone $zMin "left"
+    -attachNone $zMin "bottom"
+    -attachForm $zMin "right" 40
+
+    -attachForm $duplicatesText "top" 10
+    -attachNone $duplicatesText "left"
+    -attachNone $duplicatesText "bottom"
+    -attachControl $duplicatesText "right" 5 $duplicates
+
+    -attachForm $duplicates "top" 10
+    -attachNone $duplicates "left"
+    -attachNone $duplicates "bottom"
+    -attachForm $duplicates "right" 137
+    
+    -attachNone $rButton "top"
+    -attachForm $rButton "left" 5
+    -attachForm $rButton "bottom" 5
+    -attachForm $rButton "right" 5
+
+    -attachNone $infoText "top"
+    -attachForm $infoText "left" 5
+    -attachControl $infoText "bottom" 5 $rButton
+    -attachForm $infoText "right" 5
+    
+
+    $rForm;
+
+    showWindow $rWindow;
+}
+
+RandomizeUI();
+
